@@ -64,9 +64,24 @@ contract Basic4626Deposit {
         );
     }
 
+    function transfer(address recipient_, uint256 amount_) external returns (bool success_) {
+        balanceOf[msg.sender] -= amount_;
+
+        // Cannot overflow because minting prevents overflow of totalSupply, and sum of user balances == totalSupply.
+        unchecked { balanceOf[recipient_] += amount_; }
+
+        return true;
+    }
+
     /**********************************************************************************************/
     /*** Public View Functions                                                                  ***/
     /**********************************************************************************************/
+
+    function convertToAssets(uint256 shares_) public view returns (uint256 assets_) {
+        uint256 supply_ = totalSupply;  // Cache to stack.
+
+        assets_ = supply_ == 0 ? shares_ : (shares_ * totalAssets()) / supply_;
+    }
 
     function convertToShares(uint256 assets_) public view returns (uint256 shares_) {
         uint256 supply_ = totalSupply;  // Cache to stack.
