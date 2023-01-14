@@ -2,3 +2,6 @@
 	path = lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
 	branch = v1.2.0
+[submodule "lib/erc20"]
+	path = lib/erc20
+	url = https://github.com/maple-labs/erc20
