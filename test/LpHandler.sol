@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.7;
 
-import { console } from "../lib/forge-std/src/console.sol";
+import { MockERC20 } from "../lib/erc20/contracts/test/mocks/MockERC20.sol";
 
+import { console }  from "../lib/forge-std/src/console.sol";
 import { StdUtils } from "../lib/forge-std/src/StdUtils.sol";
 import { Vm }       from "../lib/forge-std/src/Vm.sol";
 
 import { Basic4626Deposit } from "../src/Basic4626Deposit.sol";
-
-import { ERC20 } from "./ERC20.sol";
 
 contract UnboundedLpHandler is StdUtils {
 
@@ -25,7 +24,7 @@ contract UnboundedLpHandler is StdUtils {
 
     Basic4626Deposit public token;
 
-    ERC20 public asset;
+    MockERC20 public asset;
 
     Vm private constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
 
@@ -40,7 +39,7 @@ contract UnboundedLpHandler is StdUtils {
     }
 
     constructor(address asset_, address token_, uint256 maxLps_) {
-        asset = ERC20(asset_);
+        asset = MockERC20(asset_);
         token = Basic4626Deposit(token_);
 
         lps.push(address(1));

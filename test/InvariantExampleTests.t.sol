@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.7;
+
+import { MockERC20 } from "../lib/erc20/contracts/test/mocks/MockERC20.sol";
 
 import { console }       from "../lib/forge-std/src/console.sol";
 import { InvariantTest } from "../lib/forge-std/src/InvariantTest.sol";
@@ -7,24 +9,16 @@ import { DSTest }        from "../lib/forge-std/src/Test.sol";
 
 import { Basic4626Deposit } from "../src/Basic4626Deposit.sol";
 
-import {
-    IERC20Like,
-    ILpHandlerLike,
-    ITokenLike,
-    ITransferHandlerLike
-} from "./Interfaces.sol";
+import { ILpHandlerLike, ITransferHandlerLike } from "./Interfaces.sol";
 
-import { ERC20 } from "./ERC20.sol";
-
-import { BoundedLpHandler, UnboundedLpHandler } from "./LpHandler.sol";
-
+import { BoundedLpHandler, UnboundedLpHandler }             from "./LpHandler.sol";
 import { BoundedTransferHandler, UnboundedTransferHandler } from "./TransferHandler.sol";
 
 contract Basic4626InvariantBase is DSTest, InvariantTest {
 
-    ITokenLike public token;
+    Basic4626Deposit public token;
 
-    IERC20Like public asset;
+    MockERC20 public asset;  // ERC-20 exposing `_mint` function
 
     ILpHandlerLike       public lpHandler;
     ITransferHandlerLike public transferHandler;
@@ -70,9 +64,9 @@ contract Basic4626InvariantBase is DSTest, InvariantTest {
 contract BoundedPatternInvariants is Basic4626InvariantBase {
 
     function setUp() external {
-        asset = IERC20Like(address(new ERC20("Asset", "ASSET", 18)));
+        asset = new MockERC20("Asset", "ASSET", 18);
 
-        token = ITokenLike(address(new Basic4626Deposit(address(asset), "Token", "TOKEN", 18)));
+        token = new Basic4626Deposit(address(asset), "Token", "TOKEN", 18);
 
         lpHandler = ILpHandlerLike(address(new BoundedLpHandler(address(asset), address(token), 50)));
 
@@ -113,9 +107,9 @@ contract BoundedPatternInvariants is Basic4626InvariantBase {
 contract UnboundedPatternInvariants is Basic4626InvariantBase {
 
     function setUp() external {
-        asset = IERC20Like(address(new ERC20("Asset", "ASSET", 18)));
+        asset = new MockERC20("Asset", "ASSET", 18);
 
-        token = ITokenLike(address(new Basic4626Deposit(address(asset), "Token", "TOKEN", 18)));
+        token = new Basic4626Deposit(address(asset), "Token", "TOKEN", 18);
 
         lpHandler = ILpHandlerLike(address(new UnboundedLpHandler(address(asset), address(token), 50)));
 
