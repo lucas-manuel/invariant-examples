@@ -45,6 +45,7 @@ contract UnboundedLpHandler is StdUtils {
 
         lps.push(address(1));
         numLps = 1;
+        isLp[address(1)] = true;
 
         maxLps = maxLps_;
     }
@@ -66,8 +67,6 @@ contract UnboundedLpHandler is StdUtils {
 
         lps.push(lp);
         numLps++;
-
-        console.log("lp added", lp);
 
         isLp[lp] = true;  // Prevent duplicate LP addresses in array
     }
@@ -95,8 +94,6 @@ contract UnboundedLpHandler is StdUtils {
             lps.push(receiver);
             isLp[receiver] = true;
             numLps++;
-
-            console.log("lp added", receiver);
         }
 
         token.transfer(receiver, assets);
