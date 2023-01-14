@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.10;
 
-import { console } from "../lib/forge-std/src/console.sol";
+import { console }       from "../lib/forge-std/src/console.sol";
+import { InvariantTest } from "../lib/forge-std/src/InvariantTest.sol";
+import { DSTest }        from "../lib/forge-std/src/Test.sol";
 
 import { Basic4626Deposit } from "../src/Basic4626Deposit.sol";
 
@@ -12,14 +14,13 @@ import {
     ITransferHandlerLike
 } from "./Interfaces.sol";
 
-import { ERC20 }         from "./ERC20.sol";
-import { InvariantTest } from "./InvariantTest.sol";
+import { ERC20 } from "./ERC20.sol";
 
 import { BoundedLpHandler, UnboundedLpHandler } from "./LpHandler.sol";
 
 import { BoundedTransferHandler, UnboundedTransferHandler } from "./TransferHandler.sol";
 
-contract Basic4626InvariantBase is InvariantTest {
+contract Basic4626InvariantBase is DSTest, InvariantTest {
 
     ITokenLike public token;
 

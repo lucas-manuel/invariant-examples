@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: UNLICENSED
-// ANCHOR: all
 pragma solidity 0.8.10;
 
 interface IERC20Like {
@@ -67,7 +66,8 @@ contract Basic4626Deposit {
     function transfer(address recipient_, uint256 amount_) external returns (bool success_) {
         balanceOf[msg.sender] -= amount_;
 
-        // Cannot overflow because minting prevents overflow of totalSupply, and sum of user balances == totalSupply.
+        // Cannot overflow because minting prevents overflow of totalSupply,
+        // and sum of user balances == totalSupply.
         unchecked { balanceOf[recipient_] += amount_; }
 
         return true;
