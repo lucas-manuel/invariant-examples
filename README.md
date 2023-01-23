@@ -1,4 +1,4 @@
-# Invariant Example
+# Invariant Examples
 
 [![Foundry][foundry-badge]][foundry]
 
@@ -24,6 +24,7 @@ forge install
 
 ## Running Tests
 
+- To run open invariant tests: `make open-invariant`
 - To run bounded invariant tests: `make bounded-invariant`
 - To run unbounded invariant tests: `make unbounded-invariant`
 
