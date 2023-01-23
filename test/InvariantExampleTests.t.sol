@@ -51,12 +51,12 @@ contract Basic4626InvariantBase is DSTest, InvariantTest {
 
             uint256 assetBalance = token.convertToAssets(token.balanceOf(lp));
 
-            assertTrue(assetBalance >= token.balanceOf(lp));
+            assertGe(assetBalance, token.balanceOf(lp));
 
             sumAssets += assetBalance;
         }
 
-        assertTrue((token.totalAssets() - sumAssets) <= numLps);
+        assertLe(token.totalAssets() - sumAssets, numLps);
     }
 
 }
