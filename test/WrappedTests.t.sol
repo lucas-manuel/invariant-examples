@@ -11,8 +11,8 @@ import { Basic4626Deposit } from "../src/Basic4626Deposit.sol";
 
 import { ILpHandlerLike, ITransferHandlerLike } from "./Interfaces.sol";
 
-import { BoundedLpHandler, UnboundedLpHandler }             from "./LpHandler.sol";
-import { BoundedTransferHandler, UnboundedTransferHandler } from "./TransferHandler.sol";
+import { BoundedLpHandler, UnboundedLpHandler }             from "./handlers/LpHandler.sol";
+import { BoundedTransferHandler, UnboundedTransferHandler } from "./handlers/TransferHandler.sol";
 
 contract Basic4626InvariantBase is DSTest, InvariantTest {
 
@@ -22,8 +22,6 @@ contract Basic4626InvariantBase is DSTest, InvariantTest {
 
     ILpHandlerLike       public lpHandler;
     ITransferHandlerLike public transferHandler;
-
-    uint256 public currentTimestamp;
 
     function assert_invariant_A() public {
         assertGe(token.totalAssets(), token.totalSupply());
@@ -56,7 +54,7 @@ contract Basic4626InvariantBase is DSTest, InvariantTest {
             sumAssets += assetBalance;
         }
 
-        assertGe((token.totalAssets() - sumAssets), numLps);
+        assertGe(numLps, (token.totalAssets() - sumAssets));
     }
 
 }
@@ -139,6 +137,28 @@ contract UnboundedInvariants is Basic4626InvariantBase {
             lpHandler.numCalls("unboundedLp.transfer") +
             transferHandler.numCalls("unboundedTransfer.transfer")
         );
+    }
+
+}
+
+contract OpenInvariants is Basic4626InvariantBase {
+
+    function setUp() external {
+        asset = new MockERC20("Asset", "ASSET", 18);
+
+        token = new Basic4626Deposit(address(asset), "Token", "TOKEN", 18);
+
+        targetSender(address(0x1234));
+    }
+
+    function invariant_A() external { assert_invariant_A(); }
+    function invariant_B() external { assert_invariant_B(); }
+
+    function invariant_resulting_state() external view {
+        console.log("\nResulting State\n");
+        console.log("token.totalAssets", token.totalAssets());
+        console.log("token.totalSupply", token.totalSupply());
+        console.log("asset.totalSupply", asset.totalSupply());
     }
 
 }

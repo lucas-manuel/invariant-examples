@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.7;
 
-import { MockERC20 } from "../lib/erc20/contracts/test/mocks/MockERC20.sol";
+import { MockERC20 } from "../../lib/erc20/contracts/test/mocks/MockERC20.sol";
 
-import { console }  from "../lib/forge-std/src/console.sol";
-import { StdUtils } from "../lib/forge-std/src/StdUtils.sol";
-import { Vm }       from "../lib/forge-std/src/Vm.sol";
+import { console }  from "../../lib/forge-std/src/console.sol";
+import { StdUtils } from "../../lib/forge-std/src/StdUtils.sol";
+import { Vm }       from "../../lib/forge-std/src/Vm.sol";
 
-import { Basic4626Deposit } from "../src/Basic4626Deposit.sol";
+import { Basic4626Deposit } from "../../src/Basic4626Deposit.sol";
 
 contract UnboundedLpHandler is StdUtils {
 

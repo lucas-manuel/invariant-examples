@@ -2,7 +2,7 @@
 src = 'src'
 out = 'out'
 libs = ['lib']
-verbosity = 3
+verbosity = 4
 
 [invariant]
 call_override = false  # Override calls
