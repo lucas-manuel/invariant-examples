@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.7;
 
-contract AdditionContract {
+contract AdditionExample {
 
     uint256 public val1;
     uint256 public val2;

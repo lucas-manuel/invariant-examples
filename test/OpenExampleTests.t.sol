@@ -3,14 +3,14 @@ pragma solidity ^0.8.7;
 
 import { DSTest } from "../lib/forge-std/src/Test.sol";
 
-import { AdditionContract } from "../src/AdditionContract.sol";
+import { AdditionExample } from "../src/AdditionExample.sol";
 
 contract OpenInvariants is DSTest {
 
-    AdditionContract foo;
+    AdditionExample foo;
 
     function setUp() external {
-        foo = new AdditionContract();
+        foo = new AdditionExample();
     }
 
     function invariant_A() external {
