@@ -1,12 +1,14 @@
 name: test
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [main]
 
 env:
   FOUNDRY_PROFILE: ci
 
 jobs:
-  check:
+  bounded-invariants:
     strategy:
       fail-fast: true
 
@@ -22,13 +24,7 @@ jobs:
         with:
           version: nightly
 
-      - name: Run Forge build
+      - name: Run Bounded Invariant Tests
         run: |
-          forge --version
-          forge build --sizes
-        id: build
-
-      - name: Run Forge tests
-        run: |
-          forge test -vvv
+          make bounded-invariant
         id: test

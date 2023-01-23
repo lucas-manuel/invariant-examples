@@ -1,5 +1,8 @@
 bounded-invariant:
-	FOUNDRY_PROFILE=bounded forge t --mc BoundedPatternInvariant
+	FOUNDRY_PROFILE=no_revert forge t --mc BoundedInvariants
 
 unbounded-invariant:
-	FOUNDRY_PROFILE=unbounded forge t --mc UnboundedPatternInvariants
+	FOUNDRY_PROFILE=allow_revert forge t --mc UnboundedInvariants
+
+open-invariant:
+	FOUNDRY_PROFILE=allow_revert forge t --mc OpenInvariants

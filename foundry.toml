@@ -6,13 +6,13 @@ verbosity = 3
 
 [invariant]
 call_override = false  # Override calls
-runs          = 50     # The number of calls to make in the invariant tests
-depth         = 200    # The number of times to run the invariant tests
+runs          = 50     # The number of times to run the invariant tests
+depth         = 200    # The number of calls to make in the invariant tests
 
-[profile.bounded.invariant]
+[profile.no_revert.invariant]
 fail_on_revert = true   # Fail the test if the contract reverts
 
-[profile.unbounded.invariant]
+[profile.allow_revert.invariant]
 fail_on_revert = false   # Fail the test if the contract reverts
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config

@@ -61,7 +61,7 @@ contract Basic4626InvariantBase is DSTest, InvariantTest {
 
 }
 
-contract BoundedPatternInvariants is Basic4626InvariantBase {
+contract BoundedInvariants is Basic4626InvariantBase {
 
     function setUp() external {
         asset = new MockERC20("Asset", "ASSET", 18);
@@ -104,7 +104,7 @@ contract BoundedPatternInvariants is Basic4626InvariantBase {
 
 }
 
-contract UnboundedPatternInvariants is Basic4626InvariantBase {
+contract UnboundedInvariants is Basic4626InvariantBase {
 
     function setUp() external {
         asset = new MockERC20("Asset", "ASSET", 18);
