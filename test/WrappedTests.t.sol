@@ -73,6 +73,8 @@ contract BoundedInvariants is Basic4626InvariantBase {
         excludeContract(address(asset));
         excludeContract(address(token));
 
+        // We need this to avoid reverts due to EIP-3607
+        // See https://github.com/foundry-rs/foundry/issues/2963
         targetSender(address(0x1234));
     }
 
