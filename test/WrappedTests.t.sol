@@ -72,8 +72,6 @@ contract BoundedInvariants is Basic4626InvariantBase {
 
         excludeContract(address(asset));
         excludeContract(address(token));
-
-        targetSender(address(0x1234));
     }
 
     function invariant_A() external { assert_invariant_A(); }
@@ -115,8 +113,6 @@ contract UnboundedInvariants is Basic4626InvariantBase {
 
         excludeContract(address(asset));
         excludeContract(address(token));
-
-        targetSender(address(0x1234));
     }
 
     function invariant_A() external { assert_invariant_A(); }
@@ -147,8 +143,6 @@ contract OpenInvariants is Basic4626InvariantBase {
         asset = new MockERC20("Asset", "ASSET", 18);
 
         token = new Basic4626Deposit(address(asset), "Token", "TOKEN", 18);
-
-        targetSender(address(0x1234));
     }
 
     function invariant_A() external { assert_invariant_A(); }
