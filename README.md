@@ -24,6 +24,8 @@ forge install
 
 ## Running Tests
 
+Foundry considers all functions that start with `invariant_` to be invariant tests. To run them, you can use the following commands:
+
 - To run open invariant tests: `make open-invariant`
 - To run bounded invariant tests: `make bounded-invariant`
 - To run unbounded invariant tests: `make unbounded-invariant`
