@@ -32,6 +32,7 @@ contract Basic4626InvariantBase is DSTest, InvariantTest {
     }
 
     function assert_invariant_C() public {
+        console.log("test");
         assertEq(lpHandler.sumBalance(), token.totalSupply() + 1);
     }
 
