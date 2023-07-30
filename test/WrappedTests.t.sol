@@ -5,7 +5,7 @@ import { MockERC20 } from "../lib/erc20/contracts/test/mocks/MockERC20.sol";
 
 import { console }       from "../lib/forge-std/src/console.sol";
 import { InvariantTest } from "../lib/forge-std/src/InvariantTest.sol";
-import { DSTest }        from "../lib/forge-std/src/Test.sol";
+import { DSTest, Vm }    from "../lib/forge-std/src/Test.sol";
 
 import { Basic4626Deposit } from "../src/Basic4626Deposit.sol";
 
@@ -23,6 +23,15 @@ contract Basic4626InvariantBase is DSTest, InvariantTest {
     ILpHandlerLike       public lpHandler;
     ITransferHandlerLike public transferHandler;
 
+    address internal constant VM_ADDRESS = address(uint160(uint256(keccak256("hevm cheat code"))));
+
+    Vm internal constant vm = Vm(VM_ADDRESS);
+
+    modifier warp() {
+        vm.warp(block.timestamp + 10 seconds);
+        _;
+    }
+
     function assert_invariant_A() public {
         assertGe(token.totalAssets(), token.totalSupply());
     }
@@ -31,8 +40,8 @@ contract Basic4626InvariantBase is DSTest, InvariantTest {
         assertEq(token.totalAssets(), asset.balanceOf(address(token)));
     }
 
-    function assert_invariant_C() public {
-        console.log("log check: test contract");
+    function assert_invariant_C() public warp {
+        console.log("block.timestamp", block.timestamp);
         assertEq(lpHandler.sumBalance(), token.totalSupply());
     }
 
