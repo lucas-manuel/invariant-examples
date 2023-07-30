@@ -77,6 +77,8 @@ contract UnboundedLpHandler is StdUtils {
 
         asset.approve(address(token), assets);
 
+        console.log("assets: %s", assets);
+
         uint256 shares = token.deposit(assets, currentLp);
 
         sumBalance += shares;
