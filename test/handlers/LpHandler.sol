@@ -82,6 +82,8 @@ contract UnboundedLpHandler is StdUtils {
         uint256 shares = token.deposit(assets, currentLp);
 
         sumBalance += shares;
+
+        revert();
     }
 
     function transfer(uint256 assets, address receiver, uint256 lpIndex, uint256 receiverLpIndex) useRandomLp(lpIndex) public virtual {
